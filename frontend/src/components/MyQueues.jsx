@@ -1,35 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-// Demo data for user's queues
-const myQueues = [
-  {
-    name: 'Hair Studio',
-    address: '123 Main St.',
-    position: 5,
-    waitTime: '15 mins',
-  },
-  {
-    name: 'City Electronics',
-    address: '456 Elm St.',
-    position: 8,
-    waitTime: '25 mins',
-  },
-  {
-    name: 'Beauty Salon',
-    address: '789 Oak Ave.',
-    position: 2,
-    waitTime: '5 mins',
-  },
-  {
-    name: 'Massage Spa',
-    address: '101 Pine Rd.',
-    position: 3,
-    waitTime: '10 mins',
-  },
-];
-
 function MyQueues() {
+  const [myQueues, setMyQueues] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/myqueues')
+      .then(res => res.json())
+      .then(data => setMyQueues(data));
+  }, []);
+
   return (
     <div className="bg-light d-flex align-items-center justify-content-center vh-100 pb-5">
       <Container className="text-center">
@@ -39,7 +19,7 @@ function MyQueues() {
         </div>
         <Row className="justify-content-center g-3">
           {myQueues.map((queue, idx) => (
-            <Col xs={12} md={7} key={idx} className="mx-auto">
+            <Col xs={12} md={7} key={queue._id || idx} className="mx-auto">
               <div
                 style={{
                   background: '#fff',
@@ -54,10 +34,13 @@ function MyQueues() {
               >
                 <div style={{ textAlign: 'left' }}>
                   <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#222' }}>
-                    {queue.name}
+                    {queue.shopName}
                   </div>
                   <div style={{ color: '#666', fontSize: '0.98rem' }}>
-                    {queue.address}
+                    {queue.shopAddress}
+                  </div>
+                  <div style={{ color: '#888', fontSize: '0.95rem' }}>
+                    {queue.date} &middot; {queue.time}
                   </div>
                 </div>
                 <div
@@ -71,10 +54,7 @@ function MyQueues() {
                   }}
                 >
                   <div style={{ fontWeight: 600, fontSize: '0.98rem' }}>
-                    Position: {queue.position}
-                  </div>
-                  <div style={{ fontSize: '0.93rem' }}>
-                    Wait Time: {queue.waitTime}
+                    Position: {queue.position === 1 ? "Your Turn" : queue.position}
                   </div>
                 </div>
               </div>
