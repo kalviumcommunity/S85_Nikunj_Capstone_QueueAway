@@ -1,34 +1,34 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-
-// Demo data (simulate backend)
-const demoData = {
-  hairstudio: {
-    name: 'Hair Studio',
-    address: '123 Main St.',
-    waitTime: '15 mins',
-  },
-  electroniccenter: {
-    name: 'Electronic Center',
-    address: '456 Elm St.',
-    waitTime: '10 mins',
-  },
-  beautysalon: {
-    name: 'Beauty Salon',
-    address: '789 Oak Ave.',
-    waitTime: '20 mins',
-  },
-  massagespa: {
-    name: 'Massage Spa',
-    address: '101 Pine Road',
-    waitTime: '12 mins',
-  },
-};
 
 function ShopDetails() {
   const { shopId } = useParams();
-  const shop = demoData[shopId];
+  const navigate = useNavigate();
+  const [shop, setShop] = useState(null);
+  const [selectedTime, setSelectedTime] = useState('');
+  const [date, setDate] = useState('');
+
+  useEffect(() => {
+    fetch(`/api/shops/${shopId}`)
+      .then(res => res.json())
+      .then(data => setShop(data));
+  }, [shopId]);
+
+  const handleBook = (e) => {
+    e.preventDefault();
+    fetch('/api/myqueues', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        shopId: shop._id,
+        date,
+        time: selectedTime
+      })
+    })
+      .then(res => res.json())
+      .then(() => navigate('/myqueues'));
+  };
 
   if (!shop) {
     return (
@@ -74,21 +74,28 @@ function ShopDetails() {
               </div>
               <Row className="mb-3">
                 <Col className="text-start fw-semibold">Wait Time</Col>
-                <Col className="text-end fw-semibold">{shop.waitTime}</Col>
+                <Col className="text-end fw-semibold">{shop.waitTime || 'N/A'}</Col>
               </Row>
               <div className="fw-semibold mb-2 text-start">Booking Details</div>
-              <Form>
+              <Form onSubmit={handleBook}>
                 <Form.Group className="mb-3 text-start" controlId="formDate">
                   <Form.Label className="mb-1 fw-semibold">Date</Form.Label>
-                  <Form.Control type="date" />
+                  <Form.Control type="date" value={date} onChange={e => setDate(e.target.value)} required />
                 </Form.Group>
                 <Form.Label className="mb-1 fw-semibold text-start w-100">Time</Form.Label>
                 <div className="d-flex gap-2 mb-3">
-                  <Button variant="light" style={{ border: '1px solid #bbb', minWidth: 90 }}>10:00AM</Button>
-                  <Button variant="light" style={{ border: '1px solid #bbb', minWidth: 90 }}>11:00AM</Button>
-                  <Button variant="light" style={{ border: '1px solid #bbb', minWidth: 90 }}>12:00PM</Button>
+                  {['10:00AM', '11:00AM', '12:00PM'].map(time => (
+                    <Button
+                      key={time}
+                      variant={selectedTime === time ? "dark" : "light"}
+                      style={{ border: '1px solid #bbb', minWidth: 90 }}
+                      onClick={e => { e.preventDefault(); setSelectedTime(time); }}
+                    >
+                      {time}
+                    </Button>
+                  ))}
                 </div>
-                <Button type="submit" variant="dark" className="w-100 fw-semibold" style={{ borderRadius: 8 }}>
+                <Button type="submit" variant="dark" className="w-100 fw-semibold" style={{ borderRadius: 8 }} disabled={!selectedTime || !date}>
                   Book Now
                 </Button>
               </Form>

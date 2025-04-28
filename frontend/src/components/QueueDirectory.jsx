@@ -50,8 +50,8 @@ function QueueDirectory() {
                   <div className="queue-card-name">{shop.name}</div>
                   <div className="queue-card-address">{shop.address}</div>
                 </div>
-                <Link to={`/queue-directory/${slugify(shop.name)}/book`}>
-                  <Button variant="dark">View</Button>
+                <Link to={`/queue-directory/${shop._id}/book`}>
+                <Button variant="dark">View</Button>
                 </Link>
               </div>
             </Col>

@@ -7,6 +7,7 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+app.use('/api/myqueues', require('./routes/queueRoutes'));
 
 app.use('/api/shops', require('./routes/shopRoutes'));
 
