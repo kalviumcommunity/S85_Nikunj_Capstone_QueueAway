@@ -33,3 +33,9 @@ exports.createUser = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+  if (!user) return res.status(404).json({ message: "User not found" });
+  res.json({ message: "User deleted" });
+};
