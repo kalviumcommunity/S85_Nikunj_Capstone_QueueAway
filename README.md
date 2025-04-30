@@ -40,6 +40,6 @@ JWT (JSON Web Tokens): For securing authentication and user sessions.
 
 Deployment:
 
-Heroku: For deploying the backend server.
+Render Deployement Link : https://s85-nikunj-capstone-queueaway.onrender.com/
 
 Netlify: For deploying the frontend.
