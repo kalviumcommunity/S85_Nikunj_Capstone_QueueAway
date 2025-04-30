@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'https://s85-nikunj-capstone-queueaway.onrender.com/'
+      '/api': 'http://localhost:5000'
     }
   }
 });
