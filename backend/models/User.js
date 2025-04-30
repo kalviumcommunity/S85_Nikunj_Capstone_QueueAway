@@ -1,6 +1,8 @@
-const User = require('../models/User');
+const mongoose = require('mongoose');
 
-exports.getAllUsers = async (req, res) => {
-  const users = await User.find();
-  res.json(users);
-};
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true }
+});
+
+module.exports = mongoose.model('User', userSchema);
