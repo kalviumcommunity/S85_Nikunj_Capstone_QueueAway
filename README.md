@@ -1,5 +1,23 @@
 Queue Away 🚶‍♂️💈
 Overview
+Queue Away is a MERN stack project designed to streamline appointment bookings for salons, spas, tattoo parlours, and similar businesses. It enables users to book slots, view live queue updates, and manage appointments — saving time and reducing wait-related frustration.
+
+Features
+User Authentication: Secure JWT-based login/signup with Google login integration.
+
+Real-time Queue Tracking: Live updates for appointments and queues.
+
+Appointment Management: Book, update, or cancel appointments.
+
+Profile Management: Upload and edit user profiles.
+
+Responsive Design: Optimized for all devices.
+
+Tech Stack
+Frontend: React.js, React Router, CSS3, Axios
+Backend: Node.js, Express.js, MongoDB, JWT
+Deployment: Netlify (Frontend), Heroku (Backend)Queue Away 🚶‍♂️💈
+Overview
 Queue Away is a project designed to streamline and enhance the customer experience in businesses that typically involve long wait times, such as salons, spas, tattoo parlours, and more. The application allows users to book their appointments, check live queue updates, and avoid the frustration of waiting in long lines. It’s a simple, intuitive, and time-saving solution for both businesses and customers.
 
 This project is built using the MERN stack (MongoDB, Express.js, React, Node.js) and incorporates essential features such as real-time queue tracking, user authentication, and appointment management. The goal of the project was to provide a seamless user experience, improve efficiency for businesses, and reduce customer frustration.
