@@ -8,6 +8,7 @@ import MyQueues from './components/MyQueues';
 import BusinessLogin from './components/BusinessLogin';
 import About from './components/About';
 import Help from './components/Help';
+import Profile from './components/Profile'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/business-login" element={<BusinessLogin />} />
         <Route path="/about" element={<About />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/profile" element={<Profile/>} />
       </Routes>
     </Router>
   );
