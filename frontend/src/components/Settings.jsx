@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Settings() {
+  const [notifications, setNotifications] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
     <div className="bg-light d-flex align-items-center justify-content-center vh-100">
       <div
@@ -17,17 +20,23 @@ function Settings() {
         <div style={{ fontSize: '1.1rem', color: '#222', fontWeight: 600, marginBottom: 16 }}>
           Account Settings
         </div>
-        <div style={{ color: '#666', fontSize: '1rem', marginBottom: 8 }}>
-          <label>
-            <span style={{ marginRight: 8 }}>Notifications</span>
-            <input type="checkbox" />
-          </label>
+        <div style={{ color: '#666', fontSize: '1rem', marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <span>Notifications</span>
+          <input
+            type="checkbox"
+            checked={notifications}
+            onChange={() => setNotifications(!notifications)}
+            style={{ marginLeft: 8 }}
+          />
         </div>
-        <div style={{ color: '#666', fontSize: '1rem', marginBottom: 8 }}>
-          <label>
-            <span style={{ marginRight: 8 }}>Dark Mode</span>
-            <input type="checkbox" />
-          </label>
+        <div style={{ color: '#666', fontSize: '1rem', marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <span>Dark Mode</span>
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+            style={{ marginLeft: 8 }}
+          />
         </div>
         <button className="btn btn-primary mt-3" disabled>
           Save Changes
