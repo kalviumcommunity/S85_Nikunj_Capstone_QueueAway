@@ -58,6 +58,6 @@ JWT (JSON Web Tokens): For securing authentication and user sessions.
 
 Deployment:
 
-Render Deployement Link : https://s85-nikunj-capstone-queueaway.onrender.com/
+Render Backend Deployement Link : https://s85-nikunj-capstone-queueaway.onrender.com/
 
-Netlify: For deploying the frontend.
+Render Frontend Deployement Link : https://s85-nikunj-capstone-queueaway-1.onrender.com
