@@ -9,6 +9,8 @@ import BusinessLogin from './components/BusinessLogin';
 import About from './components/About';
 import Help from './components/Help';
 import Profile from './components/Profile'
+import Settings from './components/Settings';
+
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/help" element={<Help />} />
         <Route path="/profile" element={<Profile/>} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </Router>
   );
