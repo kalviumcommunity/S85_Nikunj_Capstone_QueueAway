@@ -1,11 +1,18 @@
 const express = require('express');
-const { getMyQueues, addToQueue, updateQueue, deleteQueue } = require('../controllers/queueController');
+const {
+  getMyQueues,
+  addToQueue,
+  updateQueue,
+  deleteQueue,
+  getQueueById
+} = require('../controllers/queueController');
+const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 
-router.get('/', getMyQueues);
-router.get('/test', (req, res) => res.json({ message: 'Queue API working' }));
-router.post('/', addToQueue);
-router.put('/:id', updateQueue);      // Update a queue entry by ID
-router.delete('/:id', deleteQueue);   // Delete a queue entry by ID
+router.get('/', authMiddleware, getMyQueues);
+router.get('/:id', getQueueById);
+router.post('/', authMiddleware, addToQueue);
+router.put('/:id', updateQueue);
+router.delete('/:id', deleteQueue);
 
 module.exports = router;
